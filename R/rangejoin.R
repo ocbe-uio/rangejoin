@@ -11,6 +11,13 @@ rangejoin <- function(ctrl_data, case_data, max_ctrl_per_case, age_range) {
         )
     }
 
+    # Shuffling control data
+    ctrl_data <- ctrl_data[sample(nrow(ctrl_data)), ]
+
+    # Adding variables to control matches
+    ctrl_data$case_match <- NA_integer_
+    case_data$n_controls <- 0L
+
     # Performing the range join
     message("Matching up to ", max_ctrl_per_case, " controls per case")
     for (case in seq_len(nrow(case_data))) {
