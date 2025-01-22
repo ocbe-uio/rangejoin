@@ -14,7 +14,7 @@ rangejoin <- function(ctrl_data, case_data, max_ctrl_per_case, age_range) {
     # Performing the range join
     message("Matching up to ", max_ctrl_per_case, " controls per case")
     for (case in seq_len(nrow(case_data))) {
-    progress_bar <- txtProgressBar(style = 3)
+    progress_bar <- txtProgressBar(max = nrow(case_data), style = 2)
         for (ctrl in seq_len(nrow(ctrl_data))) {
             condition0 <- is.na(ctrl_data$case_match[ctrl])
             condition1 <- ctrl_data$sex[ctrl] == case_data$sex[case]
@@ -28,7 +28,7 @@ rangejoin <- function(ctrl_data, case_data, max_ctrl_per_case, age_range) {
                 }
             }
         }
-        setTxtProgressBar(progress_bar, case / nrow(case_data))
+        setTxtProgressBar(progress_bar, case)
     }
     close(progress_bar)
 
