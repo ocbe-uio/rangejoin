@@ -2,8 +2,9 @@
 #' @export
 rangejoin <- function(ctrl_data, case_data, max_ctrl_per_case, age_range) {
     # Validation
-    if (max_ctrl_per_case > nrow(ctrl_data) / nrow(case_data)) {
-        max_ctrl_per_case <- floor(nrow(ctrl_data) / nrow(case_data))
+    ctrl_per_case <- nrow(ctrl_data) / nrow(case_data)
+    if (max_ctrl_per_case > ctrl_per_case) {
+        max_ctrl_per_case <- floor(ctrl_per_case)
         warning(
             "Not enough control cases. Setting max_ctrl_per_case to ",
             max_ctrl_per_case
