@@ -37,7 +37,7 @@ rangejoin <- function(data, max_ctrl_per_case, age_range) {
       condition1 <- ctrl$sex[ct] == case$sex[cs]
       condition2 <- ctrl$age[ct] >= case$age[cs] + age_range[1]
       condition3 <- ctrl$age[ct] <= case$age[cs] + age_range[2]
-      if (condition0 & condition1 & condition2 & condition3) {
+      if (condition0 && condition1 && condition2 && condition3) {
         ctrl$case_match[ct] <- case$nnid[cs]
         case$n_controls[cs] <- case$n_controls[cs] + 1L
         if (case$n_controls[cs] == max_ctrl_per_case) {
