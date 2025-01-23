@@ -33,11 +33,7 @@ rangejoin <- function(data, max_ctrl_per_case, age_range) {
   for (cs in seq_len(nrow(case))) {
     progress_bar <- txtProgressBar(max = nrow(case), style = 2)
     for (ct in seq_len(nrow(ctrl))) {
-      condition0 <- is.na(ctrl$case_match[ct])
-      condition1 <- ctrl$sex[ct] == case$sex[cs]
-      condition2 <- ctrl$age[ct] >= case$age[cs] + age_range[1]
-      condition3 <- ctrl$age[ct] <= case$age[cs] + age_range[2]
-      if (condition0 && condition1 && condition2 && condition3) {
+      if (ctrl_matches_case(ctrl, case, cs, ct, age_range)) {
         ctrl$case_match[ct] <- case$nnid[cs]
         case$n_controls[cs] <- case$n_controls[cs] + 1L
         if (case$n_controls[cs] == max_ctrl_per_case) {
@@ -51,4 +47,12 @@ rangejoin <- function(data, max_ctrl_per_case, age_range) {
 
   # Returning datasets
   list("ctrl" = ctrl, "case" = case)
+}
+
+# Define a function to check the conditions
+ctrl_matches_case <- function(ctrl, case, cs, ct, age_range) {
+  is.na(ctrl$case_match[ct]) &&
+    ctrl$sex[ct] == case$sex[cs] &&
+    ctrl$age[ct] >= case$age[cs] + age_range[1] &&
+    ctrl$age[ct] <= case$age[cs] + age_range[2]
 }
