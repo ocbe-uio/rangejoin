@@ -4,8 +4,19 @@
 \alias{rangejoin}
 \title{Range join}
 \usage{
-rangejoin(ctrl_data, case_data, max_ctrl_per_case, age_range)
+rangejoin(data, max_ctrl_per_case, age_range)
+}
+\arguments{
+\item{data}{A list with two data frames: case and ctrl}
+
+\item{max_ctrl_per_case}{Maximum number of controls per case.}
+
+\item{age_range}{A vector with two elements: the minimum and maximum age
+difference between cases and controls.}
+}
+\value{
+A list with two data frames: control_data and case_data.
 }
 \description{
-Range join
+Performs a range join between case and control data.
 }
