@@ -1,6 +1,10 @@
 #' @title Range join
 #' @export
-rangejoin <- function(ctrl_data, case_data, max_ctrl_per_case, age_range) {
+rangejoin <- function(data, max_ctrl_per_case, age_range) {
+    # Extracting data
+    case_data <- data$case
+    ctrl_data <- data$ctrl
+
     # Validation
     ctrl_per_case <- nrow(ctrl_data) / nrow(case_data)
     if (max_ctrl_per_case > ctrl_per_case) {
