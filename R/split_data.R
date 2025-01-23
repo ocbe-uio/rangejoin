@@ -7,7 +7,8 @@ split_data <- function(data, split_variable) {
     split_variable <- "group"
     # Randomly assign 2 control subjects for each case
     data[[split_variable]] <- sample(
-      c("Control", "Case"), nrow(data), replace = TRUE, prob = 2:1
+      c("Control", "Case"), nrow(data),
+      replace = TRUE, prob = 2:1
     )
   }
   data[[split_variable]] <- factor(data[[split_variable]])
