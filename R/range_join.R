@@ -6,7 +6,7 @@
 #' difference between cases and controls.
 #' @return A list with two data frames: control_data and case.
 #' @export
-rangejoin <- function(data, max_ctrl_per_case, age_range) {
+range_join <- function(data, max_ctrl_per_case, age_range) {
   # Extracting data
   case <- data$case
   ctrl <- data$ctrl
