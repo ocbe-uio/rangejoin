@@ -15,7 +15,7 @@ rangejoin(data, max_ctrl_per_case, age_range)
 difference between cases and controls.}
 }
 \value{
-A list with two data frames: control_data and case_data.
+A list with two data frames: control_data and case.
 }
 \description{
 Performs a range join between case and control data.
