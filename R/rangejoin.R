@@ -50,5 +50,5 @@ rangejoin <- function(data, max_ctrl_per_case, age_range) {
     close(progress_bar)
 
     # Returning datasets
-    return(list("ctrl" = ctrl, "case" = case))
+    list("ctrl" = ctrl, "case" = case)
 }
