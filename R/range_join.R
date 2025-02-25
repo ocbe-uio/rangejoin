@@ -12,6 +12,7 @@ range_join <- function(data, max_ctrl_per_case, age_range) {
   ctrl <- data$ctrl
 
   # Validation
+  stopifnot("Can't have more cases than controls" = nrow(ctrl) >= nrow(case))
   ctrl_per_case <- nrow(ctrl) / nrow(case)
   if (max_ctrl_per_case > ctrl_per_case) {
     max_ctrl_per_case <- floor(ctrl_per_case)
