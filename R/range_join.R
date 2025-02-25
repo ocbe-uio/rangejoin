@@ -12,6 +12,7 @@ range_join <- function(data, max_ctrl_per_case, age_range) {
   ctrl <- data$ctrl
 
   # Validation
+  stopifnot("Can't have more cases than controls" = nrow(ctrl) >= nrow(case))
   ctrl_per_case <- nrow(ctrl) / nrow(case)
   if (max_ctrl_per_case > ctrl_per_case) {
     max_ctrl_per_case <- floor(ctrl_per_case)
@@ -34,7 +35,7 @@ range_join <- function(data, max_ctrl_per_case, age_range) {
     progress_bar <- txtProgressBar(max = nrow(case), style = 2)
     for (ct in seq_len(nrow(ctrl))) {
       if (ctrl_matches_case(ctrl, case, cs, ct, age_range)) {
-        ctrl$case_match[ct] <- case$nnid[cs]
+        ctrl$case_match[ct] <- as.integer(row.names(case[cs, ]))
         case$n_controls[cs] <- case$n_controls[cs] + 1L
         if (case$n_controls[cs] == max_ctrl_per_case) {
           break

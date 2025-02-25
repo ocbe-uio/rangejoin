@@ -25,7 +25,6 @@ split_data <- function(data, split_variable) {
     # Transforming split variable into factor
     data[[split_variable]] <- factor(
       data[[split_variable]],
-      levels = c(0, 1),
       labels = c("Control", "Case"),
       ordered = FALSE
     )
