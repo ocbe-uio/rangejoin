@@ -8,11 +8,19 @@
 #' @return A list with two data frames: control_data and case.
 #' @export
 range_join <- function(data, max_ctrl_per_case, age_range, quiet = TRUE) {
+  # Validating data structure
+  if (!is.list(data) || length(data) != 2) {
+    stop("
+      Data must be a list with two data frames: case and ctrl.
+      You may want to run split_data() to create a suitable list.
+    ")
+  }
+
   # Extracting data
   case <- data$case
   ctrl <- data$ctrl
 
-  # Validation
+  # Validating sizes of data frames
   stopifnot("Can't have more cases than controls" = nrow(ctrl) >= nrow(case))
   ctrl_per_case <- nrow(ctrl) / nrow(case)
   if (max_ctrl_per_case > ctrl_per_case) {
