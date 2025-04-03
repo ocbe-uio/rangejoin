@@ -1,7 +1,13 @@
 #' @title Split dataset into case and control
 #' @param data Dataset
 #' @param split_variable Binary variable to split the dataset
+#' @description Splits a data frame into case and control groups based on a
+#' binary variable. If the variable is not provided, it randomly assigns
+#' "Control" and "Case" labels to the data on a 2:1 ratio.
 #' @return A list with two data frames: case and ctrl
+#' @export
+#' @examples
+#' split_data(demo_data)
 split_data <- function(data, split_variable) {
   if (missing(split_variable)) {
     split_variable <- "group"
