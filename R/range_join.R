@@ -12,9 +12,9 @@
 #' @export
 range_join <- function(data, max_ctrl_per_case, age_range, quiet = TRUE) {
   # Validating data structure
-  if (!is.list(data) || length(data) != 2) {
+  if (!is.list(data) || !(all(c("case", "ctrl") %in% names(data)))) {
     stop("
-      Data must be a list with two data frames: case and ctrl.
+      Data must be a list with at least two data frames: case and ctrl.
       You may want to run split_data() to create a suitable list.
     ")
   }

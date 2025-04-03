@@ -39,7 +39,8 @@ split_data <- function(data, split_variable) {
   # Returning split data
   data <- list(
     "case" = data[data[[split_variable]] == "Case", ],
-    "ctrl" = data[data[[split_variable]] == "Control", ]
+    "ctrl" = data[data[[split_variable]] == "Control", ],
+    "all" = data
   )
   class(data) <- c("rangejoin_splitdata", "list")
   data

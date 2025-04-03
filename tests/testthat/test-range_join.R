@@ -1,7 +1,7 @@
 test_that("multiplication works", {
   expect_error(
     range_join(demo_data),
-    "Data must be a list with two data frames: case and ctrl"
+    "Data must be a list with at least two data frames: case and ctrl"
   )
   df <- split_data(demo_data, "case_control")
   expect_error(range_join(df), '"max_ctrl_per_case" is missing, with no defaul')
