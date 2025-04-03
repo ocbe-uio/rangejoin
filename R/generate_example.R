@@ -8,3 +8,4 @@ example <- data.frame(
   age = rlnorm(n, meanlog = 3.8, sdlog = 0.15),
   sex = sample(c("Male", "Female"), n, replace = TRUE)
 )
+save(example, file = "data/example.RData")
