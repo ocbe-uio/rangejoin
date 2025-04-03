@@ -15,5 +15,10 @@ split_data(data, split_variable)
 A list with two data frames: case and ctrl
 }
 \description{
-Split dataset into case and control
+Splits a data frame into case and control groups based on a
+binary variable. If the variable is not provided, it randomly assigns
+"Control" and "Case" labels to the data on a 2:1 ratio.
+}
+\examples{
+split_data(demo_data)
 }

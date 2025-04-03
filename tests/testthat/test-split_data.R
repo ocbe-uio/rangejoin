@@ -1,7 +1,7 @@
 test_that("splitting data works", {
-  splat_1 <- split_data(example)
-  splat_2 <- split_data(example, "case_control")
-  splat_3 <- split_data(example, "sex")
+  splat_1 <- split_data(demo_data)
+  splat_2 <- split_data(demo_data, "case_control")
+  splat_3 <- split_data(demo_data, "sex")
   expect_named(splat_1, c("case", "ctrl"))
   expect_equal(nrow(splat_1$ctrl) / nrow(splat_1$case), 2, tolerance = 1)
   expect_named(splat_2, c("case", "ctrl"))
