@@ -1,5 +1,5 @@
 test_that("multiplication works", {
-  df <- split_data(example, "case_control")
+  df <- split_data(demo_data, "case_control")
   expect_error(range_join(df), '"max_ctrl_per_case" is missing, with no defaul')
   expect_warning(
     range_join(df, max_ctrl_per_case = 2, age_range = c(-5, 5)),
