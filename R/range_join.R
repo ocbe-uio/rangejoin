@@ -3,6 +3,7 @@
 #' @param data A list with two data frames: case and ctrl
 #' @param max_ctrl_per_case Maximum number of controls per case.
 #' @param age_range A vector with two elements: the minimum and maximum age
+#' @param quiet Logical. If TRUE, suppresses progress messages.
 #' difference between cases and controls.
 #' @return A list with two data frames: control_data and case.
 #' @export

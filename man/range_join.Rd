@@ -11,7 +11,9 @@ range_join(data, max_ctrl_per_case, age_range, quiet = TRUE)
 
 \item{max_ctrl_per_case}{Maximum number of controls per case.}
 
-\item{age_range}{A vector with two elements: the minimum and maximum age
+\item{age_range}{A vector with two elements: the minimum and maximum age}
+
+\item{quiet}{Logical. If TRUE, suppresses progress messages.
 difference between cases and controls.}
 }
 \value{
