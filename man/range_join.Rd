@@ -4,7 +4,7 @@
 \alias{range_join}
 \title{Range join}
 \usage{
-range_join(data, max_ctrl_per_case, age_range)
+range_join(data, max_ctrl_per_case, age_range, quiet = TRUE)
 }
 \arguments{
 \item{data}{A list with two data frames: case and ctrl}
