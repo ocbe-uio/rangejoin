@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @importFrom utils setTxtProgressBar txtProgressBar
+#' @importFrom utils setTxtProgressBar txtProgressBar str
 "_PACKAGE"
 
 ## usethis namespace: start
