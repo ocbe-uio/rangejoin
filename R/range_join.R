@@ -6,6 +6,9 @@
 #' @param quiet Logical. If TRUE, suppresses progress messages.
 #' difference between cases and controls.
 #' @return A list with two data frames: control_data and case.
+#' @examples
+#' dt <- split_data(demo_data)
+#' range_join(dt, max_ctrl_per_case = 2L, age_range = c(-3, 3))
 #' @export
 range_join <- function(data, max_ctrl_per_case, age_range, quiet = TRUE) {
   # Validating data structure
