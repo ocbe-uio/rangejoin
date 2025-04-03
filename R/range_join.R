@@ -6,7 +6,7 @@
 #' difference between cases and controls.
 #' @return A list with two data frames: control_data and case.
 #' @export
-range_join <- function(data, max_ctrl_per_case, age_range) {
+range_join <- function(data, max_ctrl_per_case, age_range, quiet = TRUE) {
   # Extracting data
   case <- data$case
   ctrl <- data$ctrl
@@ -30,9 +30,11 @@ range_join <- function(data, max_ctrl_per_case, age_range) {
   case$n_controls <- 0L
 
   # Performing the range join
-  message("Matching up to ", max_ctrl_per_case, " controls per case")
+  if (!quiet) {
+    message("Matching up to ", max_ctrl_per_case, " controls per case")
+  }
   for (cs in seq_len(nrow(case))) {
-    progress_bar <- txtProgressBar(max = nrow(case), style = 2)
+    if (!quiet) progress_bar <- txtProgressBar(max = nrow(case), style = 2)
     for (ct in seq_len(nrow(ctrl))) {
       if (ctrl_matches_case(ctrl, case, cs, ct, age_range)) {
         ctrl$case_match[ct] <- as.integer(row.names(case[cs, ]))
@@ -42,9 +44,9 @@ range_join <- function(data, max_ctrl_per_case, age_range) {
         }
       }
     }
-    setTxtProgressBar(progress_bar, cs)
+    if (!quiet) setTxtProgressBar(progress_bar, cs)
   }
-  close(progress_bar)
+  if (!quiet) close(progress_bar)
 
   # Returning datasets
   list("ctrl" = ctrl, "case" = case)
