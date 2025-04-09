@@ -12,3 +12,19 @@ print.rangejoin_splitdata <- function(x, ...) {
   message("Control data structure")
   str(x[["ctrl"]])
 }
+
+#' @title Print method for rangejoin_rangejoin
+#' @description Prints the structure of the joined data.
+#' @param x An object of class `rangejoin_rangejoin`.
+#' @param ... Additional arguments (not used).
+#' @export
+print.rangejoin_rangejoin <- function(x, ...) {
+  for (cc in c("case", "ctrl")) {
+    message(cc)
+    print(head(x[[cc]], n = 10L))
+    obs <- nrow(x[[cc]])
+    if (obs > 10L) {
+      message("Plus ", obs - 10L, " more cases for a total of ", obs, " cases")
+    }
+  }
+}

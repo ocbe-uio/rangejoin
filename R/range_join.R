@@ -61,7 +61,9 @@ range_join <- function(data, max_ctrl_per_case, age_range, quiet = TRUE) {
   if (!quiet) close(progress_bar)
 
   # Returning datasets
-  list("ctrl" = ctrl, "case" = case)
+  data <- list("ctrl" = ctrl, "case" = case)
+  class(data) <- c("rangejoin_rangejoin", "list")
+  data
 }
 
 # Define a function to check the conditions
