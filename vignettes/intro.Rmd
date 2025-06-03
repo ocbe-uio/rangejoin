@@ -43,7 +43,8 @@ Next, we can perform a range join using the `range_join()` function. Assuming we
 
 ```{r range-join}
 range_joined <- range_join(
-  split_list, max_ctrl_per_case = 2L, join_var_range = c(-3, 3)
+  split_list,
+  max_ctrl_per_case = 2L, join_var_range = c(-3, 3)
 )
 ```
 
