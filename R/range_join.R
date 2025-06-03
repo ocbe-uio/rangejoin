@@ -13,8 +13,7 @@
 #' range_join(dt, max_ctrl_per_case = 2L, join_var_range = c(-3, 3))
 #' @export
 range_join <- function(
-  data, max_ctrl_per_case, join_var_range, join_var = "age", quiet = TRUE
-) {
+    data, max_ctrl_per_case, join_var_range, join_var = "age", quiet = TRUE) {
   # Validating data structure
   if (!is.list(data) || !(all(c("case", "ctrl") %in% names(data)))) {
     stop("
