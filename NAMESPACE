@@ -2,6 +2,7 @@
 
 S3method(print,rangejoin_rangejoin)
 S3method(print,rangejoin_splitdata)
+S3method(summary,rangejoin_rangejoin)
 export(demo_data)
 export(range_join)
 export(split_data)
