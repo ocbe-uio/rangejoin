@@ -33,6 +33,7 @@ head(demo_data)
 Suppose we want to split the demo data randomly into case and control groups. The `split_data` function helps with this:
 
 ```{r split-data}
+set.seed(3) # necessary since the splitting is random by default
 (split_list <- split_data(demo_data))
 ```
 
@@ -48,9 +49,9 @@ range_joined <- range_join(
 
 Notice the necessity to specify `max_ctrl_per_case` to limit the number of controls assigned to each case.
 
-Finally, we can visualize the matches using the `find_matches()` function:
+Finally, we can visualize the matches using the `find_matches()` function. To keep the output short, we will select a few cases to inspect:
 ```{r find-matches}
-find_matches(range_joined)
+find_matches(range_joined, case_list = c(2, 90, 100, 16))
 ```
 
 # Summary methods
