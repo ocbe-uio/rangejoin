@@ -11,7 +11,9 @@ test_that("multiplication works", {
   )
   rj <- range_join(df, max_ctrl_per_case = 1, join_var_range = c(-5, 5))
   expect_equal(max(rj[["case"]][["n_controls"]]), 1L)
-  cases_with_controls <- nrow(rj[["case"]][rj[["case"]][["n_controls"]] == 1L, ])
+  cases_with_controls <- nrow(
+    rj[["case"]][rj[["case"]][["n_controls"]] == 1L, ]
+  )
   controls_with_cases <- sum(!is.na(rj[["ctrl"]][["case_match"]]))
   expect_equal(cases_with_controls, controls_with_cases)
 })
