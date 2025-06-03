@@ -16,3 +16,23 @@ summary.rangejoin_rangejoin <- function(object, ...) {
   message("\nFrequency of control matches")
   print(table(object[["case"]][["n_controls"]], useNA = "ifany"))
 }
+
+#' @title Summary Method for Split Data Objects
+#' @description Summarize a split data object to show case, control, and all data summaries.
+#' @param object An object of class \code{rangejoin_splitdata} created by the
+#'  \code{split_data} function.
+#' @param ... Additional arguments (not used).
+#' @author Waldir Leoncio
+#' @export
+#' @examples
+#' set.seed(3)
+#' dt <- split_data(demo_data)
+#' summary(dt)
+summary.rangejoin_splitdata <- function(object, ...) {
+  message("Summary of case data")
+  print(summary(object[["case"]]))
+  message("Summary of control data")
+  print(summary(object[["ctrl"]]))
+  message("Summary of all data")
+  print(summary(object[["all"]]))
+}
