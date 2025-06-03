@@ -23,6 +23,7 @@ A list with two data frames: control_data and case.
 Performs a range join between case and control data.
 }
 \examples{
+set.seed(3)
 dt <- split_data(demo_data)
 range_join(dt, max_ctrl_per_case = 2L, age_range = c(-3, 3))
 }
