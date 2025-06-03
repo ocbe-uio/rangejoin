@@ -2,7 +2,7 @@
 title: "Introduction to rangejoin"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{intro}
+  %\VignetteIndexEntry{Introduction to rangejoin}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,22 +14,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Introduction to rangejoin
-This package provides a fast and efficient way to perform range joins in R. A range join is a type of join operation where you match rows from two datasets based on whether the values in one dataset fall within a specified range of values in another dataset.
-The `rangejoin` package is designed to handle large datasets efficiently, leveraging data.table for fast operations. It supports both left and inner joins, allowing you to combine datasets based on range conditions.
-# Installation
-You can install the `rangejoin` package from CRAN using the following command:
+This package provides a fast and efficient way to perform range joins in R. A range join is a type of join operation where you match rows from two datasets (for example, one containing treatment cases and another containing control cases) in such a way that matched values fall within a specified range.
 
-```{r setup}
-library(rangejoin)
-```
+# Exported functions
 
-# Methodological Logic
-The `rangejoin` package is designed to efficiently join two datasets based on range conditions, rather than exact matches. This is useful in scenarios such as time intervals, genomic ranges, or any case where you want to match records that overlap or fall within a certain range.
+The `split_data()` function is used to partition a dataset into non-overlapping intervals or groups, which can be helpful for preprocessing before performing a range join. The `range_join()` function then performs the actual join, matching rows from one dataset to another where a value (or range) from one falls within the range of the other. Finally, the `find_matches()` function helps visually inspect the matches found by `range_join()`.
 
-The `split_data` function is used to partition a dataset into non-overlapping intervals or groups, which can be helpful for preprocessing before performing a range join. The `range_join` function then performs the actual join, matching rows from one dataset to another where a value (or range) from one falls within the range of the other.
+# Example
 
-# Demo Data
 The package provides a `demo_data` dataset for illustration. Let's load and inspect it:
 
 ```{r demo-data}
@@ -38,30 +30,34 @@ data(demo_data)
 head(demo_data)
 ```
 
-# Using `split_data`
-Suppose we want to split the demo data into groups based on a column (e.g., `group`). The `split_data` function helps with this:
+Suppose we want to split the demo data randomly into case and control groups. The `split_data` function helps with this:
 
 ```{r split-data}
-split_list <- split_data(demo_data, by = "group")
-str(split_list)
+(split_list <- split_data(demo_data))
 ```
 
-This returns a list of data.tables, each corresponding to a unique value in the `group` column.
+Obs.: `demo_data` already contains a `case_control` column, which can be used to deterministically split the data, but here we demonstrate the random splitting.
 
-# Using `range_join`
-Now, let's demonstrate a range join. Suppose we have two datasets: `x` and `y`, each with `start` and `end` columns representing intervals. We'll join them where the intervals overlap.
+Next, we can perform a range join using the `range_join()` function. Assuming we want to assign controls to each case on `split_list` in such a way that the age of the controls are within [-3, 3] years of the cases:
 
 ```{r range-join}
-# Create two example datasets from demo_data
-x <- demo_data[group == 1, .(id, start, end)]
-y <- demo_data[group == 2, .(id, start, end)]
-
-# Perform a range join (inner join by default)
-result <- range_join(x, y, by = c("start", "end"))
-head(result)
+range_joined <- range_join(
+  split_list, max_ctrl_per_case = 2L, join_var_range = c(-3, 3)
+)
 ```
 
-This will return rows where the intervals in `x` and `y` overlap. You can also specify the type of join (e.g., `type = "left"`).
+Notice the necessity to specify `max_ctrl_per_case` to limit the number of controls assigned to each case.
 
-# Summary
-The `rangejoin` package provides efficient tools for working with range-based data joins, making it easy to handle complex interval matching tasks in R.
+Finally, we can visualize the matches using the `find_matches()` function:
+```{r find-matches}
+find_matches(range_joined)
+```
+
+# Summary methods
+
+The package also provides summary methods for the results of the range join. You can use `summary()` to get an overview of the matches found:
+
+```{r summary-method}
+summary(split_list)
+summary(range_joined)
+```
