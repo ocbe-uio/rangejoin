@@ -13,7 +13,8 @@
 \item{...}{Additional arguments (not used).}
 }
 \description{
-Summarize a split data object to show case, control, and all data summaries.
+Summarize a split data object to show case, control, and all
+data summaries.
 }
 \examples{
 set.seed(3)

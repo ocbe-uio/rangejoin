@@ -18,7 +18,8 @@ summary.rangejoin_rangejoin <- function(object, ...) {
 }
 
 #' @title Summary Method for Split Data Objects
-#' @description Summarize a split data object to show case, control, and all data summaries.
+#' @description Summarize a split data object to show case, control, and all
+#'  data summaries.
 #' @param object An object of class \code{rangejoin_splitdata} created by the
 #'  \code{split_data} function.
 #' @param ... Additional arguments (not used).
