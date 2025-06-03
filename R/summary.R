@@ -8,7 +8,7 @@
 #' @examples
 #' set.seed(3)
 #' dt <- split_data(demo_data)
-#' rj <- range_join(dt, max_ctrl_per_case = 2L, age_range = c(-3, 3))
+#' rj <- range_join(dt, max_ctrl_per_case = 2L, join_var_range = c(-3, 3))
 #' summary(rj)
 summary.rangejoin_rangejoin <- function(object, ...) {
   message("Number of controls matched per case")
