@@ -4,14 +4,22 @@
 \alias{range_join}
 \title{Range join}
 \usage{
-range_join(data, max_ctrl_per_case, age_range, quiet = TRUE)
+range_join(
+  data,
+  max_ctrl_per_case,
+  join_var_range,
+  join_var = "age",
+  quiet = TRUE
+)
 }
 \arguments{
 \item{data}{A list with two data frames: case and ctrl}
 
 \item{max_ctrl_per_case}{Maximum number of controls per case.}
 
-\item{age_range}{A vector with two elements: the minimum and maximum age}
+\item{join_var_range}{A vector with two elements: the minimum and maximum age}
+
+\item{join_var}{The variable to join on. Default is "age".}
 
 \item{quiet}{Logical. If TRUE, suppresses progress messages.
 difference between cases and controls.}
@@ -25,5 +33,5 @@ Performs a range join between case and control data.
 \examples{
 set.seed(3)
 dt <- split_data(demo_data)
-range_join(dt, max_ctrl_per_case = 2L, age_range = c(-3, 3))
+range_join(dt, max_ctrl_per_case = 2L, join_var_range = c(-3, 3))
 }
