@@ -23,8 +23,8 @@ range_join <- function(
   }
 
   # Extracting data
-  case <- data$case
-  ctrl <- data$ctrl
+  case <- data[["case"]]
+  ctrl <- data[["ctrl"]]
 
   # Validating sizes of data frames
   stopifnot("Can't have more cases than controls" = nrow(ctrl) >= nrow(case))
@@ -41,8 +41,8 @@ range_join <- function(
   ctrl <- ctrl[sample(nrow(ctrl)), ]
 
   # Adding variables to control matches
-  ctrl$case_match <- NA_integer_
-  case$n_controls <- 0L
+  ctrl[["case_match"]] <- NA_integer_
+  case[["n_controls"]] <- 0L
 
   # Performing the range join
   if (!quiet) {
@@ -52,9 +52,9 @@ range_join <- function(
     if (!quiet) progress_bar <- txtProgressBar(max = nrow(case), style = 2)
     for (ct in seq_len(nrow(ctrl))) {
       if (ctrl_matches_case(ctrl, case, cs, ct, join_var, join_var_range)) {
-        ctrl$case_match[ct] <- as.integer(row.names(case[cs, ]))
-        case$n_controls[cs] <- case$n_controls[cs] + 1L
-        if (case$n_controls[cs] == max_ctrl_per_case) {
+        ctrl[["case_match"]][ct] <- as.integer(row.names(case[cs, ]))
+        case[["n_controls"]][cs] <- case[["n_controls"]][cs] + 1L
+        if (case[["n_controls"]][cs] == max_ctrl_per_case) {
           break
         }
       }
@@ -71,8 +71,8 @@ range_join <- function(
 
 # Define a function to check the conditions
 ctrl_matches_case <- function(ctrl, case, cs, ct, join_var, join_var_range) {
-  is.na(ctrl$case_match[ct]) &&
-    ctrl$sex[ct] == case$sex[cs] &&
+  is.na(ctrl[["case_match"]][ct]) &&
+    ctrl[["sex"]][ct] == case[["sex"]][cs] &&
     ctrl[[join_var]][ct] >= case[[join_var]][cs] + join_var_range[1] &&
     ctrl[[join_var]][ct] <= case[[join_var]][cs] + join_var_range[2]
 }
