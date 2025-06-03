@@ -11,7 +11,7 @@
 #' rj <- range_join(dt, max_ctrl_per_case = 2L, join_var_range = c(-3, 3))
 #' find_matches(rj, case_list = c(2, 16, 90))
 find_matches <- function(
-  joined_data, case_list = rownames(joined_data[["case"]])) {
+    joined_data, case_list = rownames(joined_data[["case"]])) {
   all_selected <- identical(case_list, rownames(joined_data[["case"]]))
   for (kz in as.character(case_list)) {
     if (!(kz %in% rownames(joined_data[["case"]]))) {
