@@ -1,0 +1,64 @@
+---
+title: "Introduction to rangejoin"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to rangejoin}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = FALSE,
+  comment = ""
+)
+```
+
+This package provides a fast and efficient way to perform range joins in R. A range join is a type of join operation where you match rows from two datasets (for example, one containing treatment cases and another containing control cases) in such a way that matched values fall within a specified range.
+
+# Exported functions
+
+The `split_data()` function is used to partition a dataset into non-overlapping intervals or groups, which can be helpful for preprocessing before performing a range join. The `range_join()` function then performs the actual join, matching rows from one dataset to another where a value (or range) from one falls within the range of the other. Finally, the `find_matches()` function helps visually inspect the matches found by `range_join()`.
+
+# Example
+
+The package provides a `demo_data` dataset for illustration. Let's load and inspect it:
+
+```{r demo-data}
+library(rangejoin)
+data(demo_data)
+head(demo_data)
+```
+
+Suppose we want to split the demo data randomly into case and control groups. The `split_data` function helps with this:
+
+```{r split-data}
+set.seed(3) # necessary since the splitting is random by default
+(split_list <- split_data(demo_data))
+```
+
+Obs.: `demo_data` already contains a `case_control` column, which can be used to deterministically split the data, but here we demonstrate the random splitting.
+
+Next, we can perform a range join using the `range_join()` function. Assuming we want to assign controls to each case on `split_list` in such a way that the age of the controls are within [-3, 3] years of the cases:
+
+```{r range-join}
+range_joined <- range_join(
+  split_list, max_ctrl_per_case = 2L, join_var_range = c(-3, 3)
+)
+```
+
+Notice the necessity to specify `max_ctrl_per_case` to limit the number of controls assigned to each case.
+
+Finally, we can visualize the matches using the `find_matches()` function. To keep the output short, we will select a few cases to inspect:
+```{r find-matches}
+find_matches(range_joined, case_list = c(2, 90, 100, 16))
+```
+
+# Summary methods
+
+The package also provides summary methods for the results of the range join. You can use `summary()` to get an overview of the matches found:
+
+```{r summary-method}
+summary(split_list)
+summary(range_joined)
+```
