@@ -5,3 +5,4 @@ meta/
 ^\.github$
 ^doc$
 ^Meta$
+^aux$
