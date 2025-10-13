@@ -1,6 +1,6 @@
 Package: rangejoin
 Title: Matches Controls to Treaments Based on a Range of Values
-Version: 0.0.0.9016
+Version: 0.0.0.9017
 Authors@R:
     c(
         person(
